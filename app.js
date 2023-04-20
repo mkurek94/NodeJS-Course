@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const path = require("path");
 
 const express = require("express");
@@ -35,7 +37,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect("mongodb+srv://admin:admin@cluster0.6zbsqj2.mongodb.net/shop")
+  .connect(`mongodb+srv://${process.env.MONGODB_ACCOUNT_LOGIN}:${process.env.MONGODB_ACCOUNT_PASSWORD}@cluster0.6zbsqj2.mongodb.net/shop`)
   .then((res) => {
     User.findOne().then((user) => {
       if (!user) {
